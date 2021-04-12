@@ -1,4 +1,5 @@
 class Solution2{
+    // insertion approach
     static int countMin(String str)
     {
         // code here

@@ -1,5 +1,7 @@
 
 class Solution{
+
+    // finding longest palindromic subsequnece then subtracting from the length of the string
     static int countMin(String str)
     {
         // code here
