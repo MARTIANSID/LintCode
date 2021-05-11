@@ -64,11 +64,11 @@ public class heap {
     }
 
    public void downHeapify(int parent){
-       int maxIndex=parent;
+       int maxIndex=parent;     
        int rightChild=2*parent+2;
        int leftChild=2*parent+1;
 
-       if(rightChild<this.arr.size()&&this.arr.get(rightChild)>this.arr.get(maxIndex))){
+       if(rightChild<this.arr.size()&&this.arr.get(rightChild)>this.arr.get(maxIndex)){
            maxIndex=rightChild;
        }
 
