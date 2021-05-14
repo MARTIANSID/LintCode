@@ -1,39 +1,27 @@
 class Solution {
-    public int numFactoredBinaryTrees(int[] arr) {
-        int mod=(int)1e9+7;
-           HashMap<Integer,Boolean> map=new HashMap<>();
-            int num=0;
-            for(int ele:arr){
-                  num=  Math.max(ele,num);
-                    map.put(ele,true);
+    public int numFactoredBinaryTrees(int[] A) {
+        int MOD = 1_000_000_007;
+        int N = A.length;
+        Arrays.sort(A);
+        long[] dp = new long[N];
+        Arrays.fill(dp, 1);
+
+        Map<Integer, Integer> index = new HashMap();
+        for (int i = 0; i < N; ++i)
+            index.put(A[i], i);
+
+        for (int i = 0; i < N; ++i)
+            for (int j = 0; j < i; ++j) {
+                if (A[i] % A[j] == 0) { // A[j] is left child
+                    int right = A[i] / A[j];
+                    if (index.containsKey(right)) {
+                        dp[i] = (dp[i] + dp[j] * dp[index.get(right)]) % MOD;
+                    }
+                }
             }
-            
-           HashMap<Integer,Long> dp=new HashMap<>();
-            
-            long ans=0;
-            for(int i=0;i<arr.length;i++){
-                    ans+=solve(arr[i],arr,map,dp);
-            }
-            
-            return (int)(ans%mod);
-            
+
+        long ans = 0;
+        for (long x: dp) ans += x;
+        return (int) (ans % MOD);
     }
-        public long solve(int num,int[] arr,HashMap<Integer,Boolean> map,HashMap<Integer,Long> dp){
-                
-                if(dp.containsKey(num))return dp.get(num);
-                
-                long count=1;
-              for(int i=0;i<arr.length;i++){
-                      if(num%arr[i]==0&&map.containsKey(num/arr[i])){
-                              
-                            count+=solve(arr[i],arr,map,dp)*solve(num/arr[i],arr,map,dp);
-                              
-                      }
-              }  
-                dp.put(num,count);
-                return count;
-                
-        }
-        
-       
 }
