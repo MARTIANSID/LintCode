@@ -16,7 +16,7 @@ class Solution {
                  int a=(int)1e9;
                 
             for(int i=si;i<ei;i++){
-                    
+                   
                    int left=solve(arr,si,i,dp);
                    int right=solve(arr,i+1,ei,dp);
                     
