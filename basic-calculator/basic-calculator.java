@@ -5,7 +5,7 @@ class Solution {
     }
         
         public int solve(String s,int si,int ei){
-                           s+='?';
+                          
 
            Stack<Integer> st=new Stack<>();
             int no=0;
