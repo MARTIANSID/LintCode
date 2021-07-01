@@ -1,124 +1,73 @@
 class Solution {
-    public int calculate(String s) {
         
-             s = s.replaceAll("\\s", ""); 
-           Stack<Integer> st=new Stack<>();
-            String no="";
-                char sign='0';
-           for(int i=0;i<s.length();i++){
-                 
-        if(Character.isDigit(s.charAt(i))){
-              if(i<s.length()-1){
-                      no+=s.charAt(i);
-              }else{ 
-                     
-                      no+=s.charAt(i);
-                       // System.out.println(no);
-                          if(sign=='+'){
-                        
-                        int n=Integer.parseInt(no);
-                        st.push(n);
-                        sign=s.charAt(i);
-                        no="";
-                        
-                }else if(sign=='-'){
-                        int n=Integer.parseInt(no);
-                        st.push(-n);
-                        sign=s.charAt(i);
-                        no="";
-                        
-                        
-                }else if(sign=='*'){
-                        
-                         int n=Integer.parseInt(no);
-                        int y=st.pop();
-                        
-                        st.push(n*y);
-                        
-                        
-                        sign=s.charAt(i);
-                        no="";
-                        
-                        
+        private void solve(Stack<Integer> st,char sign,int no){
+                  if(sign=='+'){
+                                 st.push(no);
+                              
+                                 
+                         }else if(sign=='-'){
+                                 st.push(-no);
+                                 
+                                 
+                         }else if(sign=='*'){
+                                 int number=st.pop();
+                                 int result=number*no;
+                                 st.push(result);
+                             
+                                 
+                         }else if(sign=='/'){
+                                  int number=st.pop();
+                                 int result=number/no;
+                                 st.push(result);
                                 
-                }else if(sign=='/'){
-                        
-                         int n=Integer.parseInt(no);
-                        int y=st.pop();
-                        
-                        st.push(y/n);
-                        
-                                  // System.out.println(y);
-                        
-                        sign=s.charAt(i);
-                        no="";
-                        
-                }else{
-                      sign=s.charAt(i);
-                           int n=Integer.parseInt(no);
-                        st.push(n);
-                        no="";
-                }  
-                      
-              }
-        }else if(s.charAt(i)!=' '){
-                
-                if(sign=='+'){
-                        
-                        int n=Integer.parseInt(no);
-                        st.push(n);
-                        sign=s.charAt(i);
-                        no="";
-                        
-                }else if(sign=='-'){
-                        int n=Integer.parseInt(no);
-                        st.push(-n);
-                        sign=s.charAt(i);
-                        no="";
-                        
-                        
-                }else if(sign=='*'){
-                        
-                         int n=Integer.parseInt(no);
-                        int y=st.pop();
-                        
-                        st.push(n*y);
-                        
-                        
-                        sign=s.charAt(i);
-                        no="";
-                        
-                        
+                                 
+                         }else{
                                 
-                }else if(sign=='/'){
-                        
-                         int n=Integer.parseInt(no);
-                        int y=st.pop();
-                        
-                        st.push(y/n);
-                        
-                        
-                        sign=s.charAt(i);
-                        no="";
-                        
-                }else{
-                        sign=s.charAt(i);
-                           int n=Integer.parseInt(no);
-                        st.push(n);
-                        no="";
-                }
-                
-                
+                                 st.push(no);
+                               
+                         }
                 
         }
+        
+    public int calculate(String s) {
+        Stack<Integer> st=new Stack<>();
+        int si=0,ei=s.length();
+            int no=0;
+            char sign='~';
+         for(int i=si;i<=ei;i++){
+                
+                 
+                 char ch='~';
+                 if(i!=ei)
+                  ch=s.charAt(i);
+                 
+               
+                 
+                 if(Character.isDigit(ch)){
+                         no=no*10+ch-'0';
+                        
+                        
+                 }else if(ch!=' '&&i!=ei){
+                         solve(st,sign,no);
+                         sign=ch;
+                         no=0;
+                       
+                 }
+                 
+                 if(i==ei){
+                         solve(st,sign,no);
+                         sign=ch;
+                         no=0;
+                 }
+                 
+                 
+                 
+         }
+            int ans=0;
+           for(int i=0;i<st.size();i++){
+                   ans+=st.get(i);
+           }
+            return ans;
             
     }
-            int ans=0;
-            while(st.size()!=0){
-                    int x=st.pop();
-                    // System.out.println(x);
-                    ans+=x;
-            }
-            return ans;
-}
 }
