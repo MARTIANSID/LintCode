@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 class Solution {
     public int[] mostCompetitive(int[] nums, int k) {
      
