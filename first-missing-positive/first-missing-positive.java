@@ -1,19 +1,40 @@
 class Solution {
     public int firstMissingPositive(int[] nums) {
-        HashMap<Integer,Integer> map=new HashMap<>();
+      //nice q!
             
-           for(int i=0;i<nums.length;i++){
-                   map.put(nums[i],1);
-           }
+            // You must implement an algorithm that runs in O(n) time and uses constant extra space.
+    //put the elements at thier right indexes
+     //ignore numbers greater than n+1 also negetive numbers
+        
+       //dry run to find the edge case
+      
             
-            boolean missing=true;
-            int j=1;
-            int ans=-1;
-            while(missing){
-                  missing = map.containsKey(j);
-                   ans=j;
-             j++;       
-            }
-            return ans;
+            int n=nums.length;
+         for(int i=0;i<n;i++){
+          
+                while(nums[i]!=i+1&&nums[i]<n&&nums[i]>0){
+                        if(nums[nums[i]-1]==nums[i])break;
+                        
+                        swap(nums,i,nums[i]-1);
+                }
+               
+                 
+                
+         }
+             for(int i=0;i<nums.length;i++){
+                         if(nums[i]!=i+1)return i+1;
+                 } 
+            
+             return n+1;
+                 
+         
+         
     }
+        
+           private void swap(int[] nums,int i,int j){
+                    int temp=nums[i];
+                    nums[i]=nums[j];
+                    nums[j]=temp;
+            }
+            
 }
