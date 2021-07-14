@@ -1,5 +1,4 @@
 class Solution {
-        
         class pair{
                 int val;
                 int index;
@@ -9,42 +8,65 @@ class Solution {
                 }
         }
     public int[] maxSlidingWindow(int[] nums, int k) {
-        PriorityQueue<pair> pq=new PriorityQueue<>((a,b)->{
-           return b.val-a.val;     
-        });
+         Deque<pair> deque
+            = new LinkedList<>();
             
-            int ei=0,si=0,n=nums.length;
-            List<Integer> list=new ArrayList<>();
+          int ei=0,si=0,n=nums.length;
+            boolean insert=false;
+            List<Integer> ans=new ArrayList<>();
             
             while(ei<n){
-                    pq.add(new pair(nums[ei],ei));
-                    ei++;
-                    while(pq.size()<k){
-                            pq.add(new pair(nums[ei],ei));
-                            ei++;
+                    while(ei<k-1){
+                            if(deque.size()==0){
+                                    deque.offer(new pair(nums[ei],ei));
+                                    ei++;
+                                    
+                            }else{
+                                    while(deque.size()>0&&nums[ei]>deque.peekLast().val){
+                                            
+                                             deque.pollLast();
+                                    }
+                                  
+                                    deque.offer(new pair(nums[ei],ei));
+                                    ei++;
+                            }
                     }
+                     while(deque.size()>0&&nums[ei]>deque.peekLast().val){
+                                            
+                                             deque.pollLast();
+                                  }
                     
-                    while(pq.peek().index<si){
-                         pq.poll();   
-                    }
+                    
+                      deque.offer(new pair(nums[ei],ei));      
+                    
+                   
+                    ei++;
+                    ans.add(deque.peekFirst().val);
+                    
                     si++;
                     
-                    list.add(pq.peek().val);
-                    
-                    
-        
-                    
-            }
-            
-            
-            int[] ans=new int[list.size()];
-            for(int i=0;i<list.size();i++){
-                    ans[i]=list.get(i);
-            }
-            return ans;
+                   while(deque.size()>0&&deque.peekFirst().index<si){
+                           deque.poll();
+                           
+                   }
 
+                    
+                   
+                     
+                    
+                    
+                    
+            }
+            
+            // System.out.println(deque.peekFirst().val);
+            
+            // System.out.println(ans);
+            
+            int[] result=new int[ans.size()];
+            for(int i=0;i<ans.size();i++){
+                    result[i]=ans.get(i);
+            }
+            
+            return result;
     }
-        
-        //[1,3,-1]
-        
 }
