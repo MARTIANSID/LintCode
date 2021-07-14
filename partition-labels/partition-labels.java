@@ -23,7 +23,7 @@ class Solution {
                            index=max;
                            if(i<n-1)
                            max=map.get(s.charAt(i+1));
-                         
+                                
                    }else{
                                 
                            ans.add(max-index);
