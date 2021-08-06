@@ -9,7 +9,7 @@ class Solution {
             
             int i=0,j=1,count=0;
             while(i<=j&&j<nums.length){
-                if(nums[j]-nums[i]<mid){
+                if(nums[j]-nums[i]<=mid){
                     count+=j-i;
                     j++;
                 }else{
@@ -26,7 +26,7 @@ class Solution {
             
         }
         
-        return l-1;
+        return l;
             
     }
     
