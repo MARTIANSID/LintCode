@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 class Solution2{
     // insertion approach
     static int countMin(String str)

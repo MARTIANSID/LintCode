@@ -1,5 +1,5 @@
-import java.util.Arrays;
-import java.util.Scanner;
+package Graph;
+import java.util.*;
 
 public class Bellmanford {
    static  int[] dis = new int[5];

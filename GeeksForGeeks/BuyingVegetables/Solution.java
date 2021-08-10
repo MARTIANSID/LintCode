@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 class Solution{
     static int minCost(int N, int cost[][]) {
         
