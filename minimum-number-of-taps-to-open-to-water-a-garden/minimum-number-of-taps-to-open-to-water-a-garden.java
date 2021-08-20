@@ -3,7 +3,8 @@ class Solution {
     
         List<int[]>  intervals=new ArrayList<>();
         
-        for(int i=0;i<ranges.length;i++){
+        for(int i=0;i<ranges.length;i
+            ++){
             intervals.add(new int[]{i-ranges[i],i+ranges[i]});
         }
         
@@ -13,18 +14,16 @@ class Solution {
         
         int start=0;
         
-        PriorityQueue<int[]> pq=new PriorityQueue<>((a,b)->{
-            return b[1]-a[1];
-        });
-        int count=0,i=0;
+        
+        int count=0,i=0,max=0;
         while(start<n){
           
                 while(i<ranges.length&&intervals.get(i)[0]<=start){
-                    pq.add(intervals.get(i));
+                   max=Math.max(max,intervals.get(i)[1]);
                     i++;
                 }
-            if(pq.size()<=0)return -1;
-               start=pq.poll()[1];
+            if(max<=start)return -1;
+               start=max;
                 count++;
             
         }
