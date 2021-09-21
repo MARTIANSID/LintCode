@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 // import javax.swing.text.html.HTMLDocument.Iterator;
 
@@ -50,5 +51,12 @@ System.out.println(a);
     // while(h.size()!=0){
     //     System.out.println(h.remove());     
     // }
+
+
+    // PriorityQueue<Integer> pq=new PriorityQueue<>();  //min heap
+    // PriorityQueue<Integer> pq=new PriorityQueue<>((a,b)->{  //max heap
+    //     // return b-a;   >0
+    // });  //min heap
+
    } 
 }

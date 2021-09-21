@@ -2,6 +2,19 @@ import java.util.*;
 
 public class Chef_and_Closure{
 
+    public int smallestRangeII(int[] nums, int k) {
+        int n=nums.length;
+        
+        Arrays.sort(nums);
+        
+        
+        for(int i=0;i<n;i++){
+            
+        }     
+        
+        return 0;
+    }
+
     public static void main(String[] args){
         Scanner sys=new Scanner(System.in);
         int t=0;

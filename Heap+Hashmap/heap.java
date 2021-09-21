@@ -65,16 +65,16 @@ public class heap {
 
    public void downHeapify(int parent){
        int maxIndex=parent; 
-       int rightChild=2*parent+2;
+       int rightChild=2*parent+2;   
        int leftChild=2*parent+1;
 
        if(rightChild<this.arr.size()&&this.arr.get(rightChild)>this.arr.get(maxIndex)){
            maxIndex=rightChild;
        }
 
-       if(leftChild<this.arr.size()&&this.arr.get(leftChild)>this.arr.get(maxIndex)){
-        maxIndex=leftChild;
-    }
+        if(leftChild<this.arr.size()&&this.arr.get(leftChild)>this.arr.get(maxIndex)){
+            maxIndex=leftChild;
+        }
 
     if(maxIndex!=parent){
         swap(maxIndex,parent);
