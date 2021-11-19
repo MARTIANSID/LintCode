@@ -1,7 +1,8 @@
 
 class Solution {
 // this is the optimized solution-in this we ensure that in the pq we have the most minimum element at all times
-
+//     https://leetcode.com/problems/find-the-kth-smallest-sum-of-a-matrix-with-sorted-rows/discuss/610701/C%2B%2BJavaPython-Binary-Search-O(m*k*log(m*5000))-MinHeap-O(m*k*logk)-Solutions
+//  above link is a follow up for this q
 
     class pair{
             int no1;
