@@ -46,7 +46,8 @@ class Solution {
                     }
                 
                     visited[e.vrtx]=true;
-                    for(int[] child:graph.get(e.vrtx)){    
+                    for(int[] child:graph.get(e.vrtx)){  
+                        if(visited[child[0]])continue;
                         if(e.weight+child[1]<distance[child[0]]){
                             ways[child[0]]=ways[e.vrtx];
                             distance[child[0]]=e.weight+child[1];
@@ -58,11 +59,6 @@ class Solution {
                              
                     }
             }
-        
-        
-        
-        
-        
         
         return ways[n-1];
     }
