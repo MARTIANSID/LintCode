@@ -1,42 +1,42 @@
-    package os;
+
     import java.util.*;
 
     public class fcfs {
-    //round robin non-premptive 
-        
-        public static void main(String[] args) {
+    
+                public static void main(String[] args) {
             Scanner sys = new Scanner(System.in);
             System.out.println("Enter the number of processes");
             int n = sys.nextInt();
 
-            int[] arrivalTimes = new int[n];
-            int[] serviceTimes = new int[n];
+            int[] aT = new int[n];
+            int[] sT = new int[n];
 
             for (int i = 0; i < n; i++) {
-                int a=i+1;
-                System.out.println("Enter the arrival time of " + a+ " "+ "process");
-                arrivalTimes[i] = sys.nextInt();
-                System.out.println("Enter the service time of " + a + " "+ "process");
-                serviceTimes[i] = sys.nextInt();
+                int z=i+1;
+                System.out.println("Enter the arrival time of " + z+ " "+ "process");
+                aT[i] = sys.nextInt();
+                System.out.println("Enter the service time of " + z + " "+ "process");
+                sT[i] = sys.nextInt();
             }
 
-            int[] completionTime = new int[n];
+            int[] cT = new int[n];
 
+            double totalWaitTime=0;
             double avgWaitTime=0;
 
             for (int i = 0; i < n; i++) {
                 if (i == 0) {
-                    completionTime[i] = arrivalTimes[i] + serviceTimes[i];
+                    cT[i] = aT[i] + sT[i];
                 } else {
-                    if (arrivalTimes[i] > completionTime[i - 1]) {
-                        completionTime[i] = arrivalTimes[i] + serviceTimes[i];
+                    if (aT[i] > cT[i - 1]) {
+                        cT[i] = aT[i] + sT[i];
                     } else
-                        completionTime[i] = completionTime[i - 1] + serviceTimes[i];
+                        cT[i] = cT[i - 1] + sT[i];
                 }
                 
-                avgWaitTime+=completionTime[i]-arrivalTimes[i];
+                totalWaitTime+=cT[i]-aT[i];
             }
-            avgWaitTime=((double)avgWaitTime/(double)n);
+            avgWaitTime=((double)totalWaitTime/(double)n);
 
             System.out.println(avgWaitTime);
             

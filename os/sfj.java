@@ -1,4 +1,4 @@
-package os;
+
 
 import java.util.*;
 
@@ -15,62 +15,55 @@ public class sfj {
             this.id = id;
         }
     }
-
-    // shortest job means lowest burst/service time
-    // this is premptive algo
     public static void main(String[] args) {
         Scanner sys = new Scanner(System.in);
         System.out.println("Enter the number of processes");
         int n = sys.nextInt();
         System.out.println("Enter the time Quantum");
-        int timeQuantum = sys.nextInt();
+        int tQ = sys.nextInt();
 
-        int[] arrivalTimes = new int[n];
-        int[] serviceTimes = new int[n];
+        int[] aT = new int[n];
+        int[] sT = new int[n];
 
         for (int i = 0; i < n; i++) {
             int pid=i+1;
             System.out.println("Enter the arrival time of " + pid + " " + "process");
-            arrivalTimes[i] = sys.nextInt();
+            aT[i] = sys.nextInt();
             System.out.println("Enter the service time of " + pid + " " + "process");
-            serviceTimes[i] = sys.nextInt();
+            sT[i] = sys.nextInt();
         }
 
         List<process> jobs = new ArrayList<>();
         for (int i = 0; i < n; i++)
-            jobs.add(new process(arrivalTimes[i], serviceTimes[i], i));
+            jobs.add(new process(aT[i], sT[i], i));
 
-        // Collections.sort(jobs, (a, b) -> {
-        //     return a.arrivalTime - b.arrivalTime;
-        // });
 
-        PriorityQueue<process> pq = new PriorityQueue<>((a, b) -> {
+        PriorityQueue<process> minHeap = new PriorityQueue<>((a, b) -> {
             if (a.serviceTime == b.serviceTime)
                 return a.arrivalTime - b.arrivalTime;
             return a.serviceTime - b.serviceTime;
         });
 
         int[] turn = new int[n];
-        int index = 0, time = 0;
+        int jobNo = 0, time = 0;
 
-        while (index < n || pq.size() > 0) {
-            while (index < n && jobs.get(index).arrivalTime <= time) {
-                pq.add(jobs.get(index));
-                index++;
+        while (jobNo < n || minHeap.size() > 0) {
+            while (jobNo < n && jobs.get(jobNo).arrivalTime <= time) {
+                minHeap.add(jobs.get(jobNo));
+                jobNo++;
             }
-            if (pq.size() > 0) {
-                process p = pq.poll();
-                if (timeQuantum <= p.serviceTime)
-                    time += timeQuantum;
+            if (minHeap.size() > 0) {
+                process p = minHeap.poll();
+                if (tQ <= p.serviceTime)
+                    time += tQ;
                 else
                     time += p.serviceTime;
 
-                int newServiceTime = p.serviceTime - timeQuantum;
+                int newServiceTime = p.serviceTime - tQ;
                 if (newServiceTime > 0)
-                    pq.add(new process(p.arrivalTime, newServiceTime, p.id));
+                    minHeap.add(new process(p.arrivalTime, newServiceTime, p.id));
                 else
-                    turn[p.id] = time;
-
+                    turn[p.id] = time; //saving the time at which this particular process gets completed
             } else {
                 time++;
             }
@@ -78,22 +71,19 @@ public class sfj {
         int[] waitTime = new int[n];
         int totalWaitTime = 0, totalTurnAroundTime = 0;
         for (int i = 0; i < n; i++) {
-            waitTime[i] = (turn[i] - arrivalTimes[i]) - serviceTimes[i];
+            waitTime[i] = (turn[i] - aT[i]) - sT[i];
             totalWaitTime += waitTime[i];
             System.out.println(turn[i]);
-            totalTurnAroundTime += (turn[i] - arrivalTimes[i]);
-            // System.out.println(waitTime[i]);
+            totalTurnAroundTime += (turn[i] - aT[i]);
+           
         }
-
-        double avgWaitTime = (double) ((double) totalWaitTime) / ((double) n);
+        double avgWaitTime = (double) ((double) totalWaitTime) / ((double) n); //average time
         double avgTurnAroundTime = (double) ((double) totalTurnAroundTime) / ((double) n);
 
 
-        System.out.println("Average Wait Time");
+        System.out.println("Average Wait Time Calculated is:");
         System.out.println(avgWaitTime);
-
-        System.out.println("Average Turn Around Time");
-
+        System.out.println("Average Turn Around Time Calculated is:");
         System.out.println(avgTurnAroundTime);
 
     }
