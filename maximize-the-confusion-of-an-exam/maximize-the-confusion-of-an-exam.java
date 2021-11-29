@@ -10,7 +10,7 @@ class Solution {
             }
              max=Math.max(max,freq[index]);
             
-            while(count==2&&(ei-si)-max>k){
+            while((ei-si)-max>k){
                  index=answerKey.charAt(si++)=='T'?0:1;
                 if(freq[index]--==1)count--;
                 max=0;
