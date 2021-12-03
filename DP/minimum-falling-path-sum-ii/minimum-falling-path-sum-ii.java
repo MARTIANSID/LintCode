@@ -1,29 +1,36 @@
 class Solution {
-    public int minFallingPathSum(int[][] arr) {
-            int min=(int)1e9;
-            int[][] dp=new int[arr.length+1][arr[0].length+1];
-            for(int[] row:dp)Arrays.fill(row,-1);
-       for(int i=0;i<arr[0].length;i++){
-               min=Math.min(min,solve(arr,0,i,dp));
-       }
-            return min;
-    }
-        
-        public int solve(int[][] arr, int r,int c,int[][] dp){
-                
-                if(r>=arr.length||c>=arr[0].length)return dp[r][c]=(int)1e9;
-                
-                if(r==arr.length-1){
-                        return arr[r][c];
+    public int minFallingPathSum(int[][] grid) {
+        int n=grid.length;
+        int m=grid[0].length;
+        for(int i=1;i<n;i++){
+            int min1=(int)1e9,min2=(int)1e9,c1=-1,c2=-1;
+            for(int j=0;j<m;j++){
+                if(grid[i-1][j]<=min1){
+                    min2=min1;
+                    c2=c1;
+                    min1=grid[i-1][j];
+                    c1=j;
+                }else if(grid[i-1][j]<min2){
+                    min2=grid[i-1][j];
+                    c2=j;
                 }
-                
-                if(dp[r][c]!=-1)return dp[r][c];
-                
-                int min=(int)1e9;
-                for(int i=0;i<arr[0].length;i++){
-                        if(i!=c)
-                    min=   Math.min(min, solve(arr,r+1,i,dp)+arr[r][c]);
+            }
+            
+            for(int j=0;j<m;j++){
+                if(j!=c1){
+                    grid[i][j]+=min1;
+                }else if(j!=c2){
+                    grid[i][j]+=min2;
                 }
-                return  dp[r][c]=min;
+            }
         }
+        
+        int om=(int)1e9;
+        for(int i=0;i<m;i++){
+            om=Math.min(om,grid[n-1][i]);
+        }
+        
+        return om;
+    }
+    
 }
