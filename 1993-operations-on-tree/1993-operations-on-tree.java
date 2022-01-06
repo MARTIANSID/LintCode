@@ -39,15 +39,18 @@ class LockingTree {
         //descendants
         if(!descendants(num))return false;
         
-        int cur=num;
-        while(cur!=-1){
-            if(map.containsKey(cur))return false;
-            cur=parent[cur];
-        }
-        
-        // for(int ele:path){
-        //     if(map.containsKey(ele))return false;
+        // int cur=num;
+        // while(cur!=-1){
+        //     if(map.containsKey(cur))return false;
+        //     cur=parent[cur];
         // }
+        
+        List<Integer> path=new ArrayList<>();
+        
+        ancestors(0,num,path);
+        for(int ele:path){
+            if(map.containsKey(ele))return false;
+        }
         
         unlockAll(num,num);
         map.put(num,user);
@@ -63,17 +66,18 @@ class LockingTree {
         return false;
     }
     
-//     public boolean ancestors(int src,int dest,List<Integer> path){
+    public boolean ancestors(int src,int dest,List<Integer> path){
         
-//        if(src==dest)return true;
+       if(src==dest)return true;
         
-//         for(int child:graph.get(src)){
-//             if(ancestors(child,dest,path)){
-//                 path.add(src);
-//             }
-//         }
-//         return false;
-//     }
+        for(int child:graph.get(src)){
+            if(ancestors(child,dest,path)){
+                path.add(src);
+                return true;
+            }
+        }
+        return false;
+    }
     
     public void unlockAll(int src,int p){
         if(p!=src&&map.containsKey(src)){
