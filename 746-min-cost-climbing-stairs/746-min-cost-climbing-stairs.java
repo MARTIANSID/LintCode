@@ -6,15 +6,15 @@ class Solution {
         
         if(n==1||n==0)return n==1?cost[0]:0; 
         
-        int[] dp=new int[n];
-        dp[n-1]=cost[n-1];
-        dp[n-2]=cost[n-2];
+        // int[] dp=new int[n];
+        // dp[n-1]=cost[n-1];
+        // dp[n-2]=cost[n-2];
         
         if(n==2){
-            return Math.min(dp[0],dp[1]);
+            return Math.min(cost[0],cost[1]);
         }
-        int second=dp[n-1];
-        int first=dp[n-2];
+        int second=cost[n-1];
+        int first=cost[n-2];
         
         
         
