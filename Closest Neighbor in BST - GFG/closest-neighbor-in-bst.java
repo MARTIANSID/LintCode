@@ -115,28 +115,28 @@ class GfG {
 class Tree
 {
     
-  static  int n=-1;
+  
     
-    public static void find(Node root,int val){
-        if(root==null)return;
+    public static int find(Node root,int val,int n){
+        if(root==null)return n;
             
         if(root.key==val){
             n=root.key;
-            return;
+            return n;
         }
         
         if(root.key<val){
             n=root.key;
-            find(root.right,val);
+           return find(root.right,val,n);
         }else{
-            find(root.left,val);
+            return find(root.left,val,n);
         }
     }
     public static int findMaxForN(Node node, int val)
     {
         
-        find(node,val);
-    return n;
+        return find(node,val,-1);
+    
     //Add your code here.
     }
 }
