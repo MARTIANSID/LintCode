@@ -2,10 +2,14 @@ class Solution {
     public int countDifferentSubsequenceGCDs(int[] nums) {
          int n=nums.length,max=-(int)1e9;
         
-        HashMap<Integer,Boolean> map=new HashMap<>();
+        
         for(int ele:nums){
-            map.put(ele,true);
+           
            max=Math.max(max,ele);        
+        }
+        int[] arr=new int[max+1];
+        for(int ele:nums){
+            arr[ele]=1;
         }
         
         int cnt=0;
@@ -13,7 +17,7 @@ class Solution {
             int prev=-1;
             for(int j=i;j<=max;j+=i){
                 
-                if(map.containsKey(j)){
+                if(arr[j]!=0){
                     if(prev!=-1)
                    prev=gcd(j,prev);
                     else
