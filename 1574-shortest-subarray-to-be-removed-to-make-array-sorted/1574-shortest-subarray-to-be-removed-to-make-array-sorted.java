@@ -4,8 +4,8 @@ class Solution {
         int[] left=new int[n];
         int[] right=new int[n];
         
-        Arrays.fill(left,-1);
-        Arrays.fill(right,-1);       
+        // Arrays.fill(left,-1);
+        // Arrays.fill(right,-1);       
         
         left[0]=1;
         for(int i=1;i<n;i++){
