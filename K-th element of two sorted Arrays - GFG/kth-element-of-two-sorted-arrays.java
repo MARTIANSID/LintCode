@@ -46,44 +46,37 @@ class GFG {
 class Solution {
     public long kthElement( int arr1[], int arr2[], int n, int m, int k) {
         
-      //two pointer
-      int i=0,j=0;
-     
-     
-      while(i<n&&j<m&&k>1){
-        if(arr1[i]<arr2[j]){
-            i++;
-        }else{
-            j++;
+        //using binary search solve
+        int si=1,ei=Integer.MAX_VALUE-1;
+        
+        while(si<=ei){
+            int mid=si-(si-ei)/2;
+            if(count(mid,arr1,arr2)>=k){
+                ei=mid-1;
+            }else{
+                si=mid+1;
+            }
+            
         }
-        k--;
-      }
-    if(k==1){
-          if(i>=n){
-          return arr2[j];
-      }else if(j>=m){
-          return arr1[i];
-      }
-
-      return Math.min(arr1[i],arr2[j]);
-    }else{
-       if(i>=n){
-           while(j<m&&k>1){
-               j++;
-               k--;
-           }
-           return arr2[j];
-       }else{
-            while(i<n&&k>1){
-               i++;
-               k--;
-           }
-           return arr1[i];
-       }
-        
-        
-    }     
-      
+        return si;
+    }
     
+    public int cnt(int val,int[] arr){
+        
+        int si=0,ei=arr.length-1;
+        
+        while(si<=ei){
+            int mid=(si+ei)/2;
+            if(arr[mid]<=val){
+                si=mid+1;
+            }else{
+                ei=mid-1;
+            }
+        }
+        return si;
+    }
+
+    public int count(int mid,int[] arr1,int[] arr2){
+        return cnt(mid,arr1)+cnt(mid,arr2);
     }
 }
