@@ -12,12 +12,12 @@ class MyCalendar {
         
         
         Integer startVal=endKey.higherKey(start);
-        Integer endVal=startKey.lowerKey(end);
+        
         
     
         
         
-        if((startVal!=null&&endKey.get(startVal)<end)||(endVal!=null&&startKey.get(endVal)>start))return false;
+        if((startVal!=null&&endKey.get(startVal)<end))return false;
        
         startKey.put(start,end);
         endKey.put(end,start);        
