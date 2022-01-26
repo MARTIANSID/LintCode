@@ -5,21 +5,15 @@ class MyCalendar {
     }
     
     TreeMap<Integer,Integer> endKey=new TreeMap<>();
-    TreeMap<Integer,Integer> startKey=new TreeMap<>();
+    HashMap<Integer,Integer> map=new HashMap<>();
     public boolean book(int start, int end) {
-        
-        //solving with respect to end
         
         
         Integer startVal=endKey.higherKey(start);
         
-        
-    
-        
-        
-        if((startVal!=null&&endKey.get(startVal)<end))return false;
+        if((startVal!=null&&map.get(startVal)<end))return false;
        
-        startKey.put(start,end);
+        map.put(end,start);
         endKey.put(end,start);        
         return true;
         
