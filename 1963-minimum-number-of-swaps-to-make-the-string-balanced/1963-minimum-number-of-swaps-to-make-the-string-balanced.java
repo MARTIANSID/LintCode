@@ -15,7 +15,7 @@ class Solution {
     
     int x=st.size();
     
-        //x==2
+
         
         if(x==2)return 1;
         
