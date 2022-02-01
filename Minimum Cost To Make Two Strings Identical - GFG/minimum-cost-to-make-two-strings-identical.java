@@ -35,9 +35,9 @@ class Solution
 		int n=X.length();
 		int m=Y.length();
 		
-		dp=new int[X.length()+1][Y.length()+1];
+// 		dp=new int[X.length()+1][Y.length()+1];
 		
-		int[] cur=new int[m+1];
+		int[] cur=new int[m+1];  s
 		int[] next=new int[m+1];
 		
 		for(int i=n;i>=0;i--){
