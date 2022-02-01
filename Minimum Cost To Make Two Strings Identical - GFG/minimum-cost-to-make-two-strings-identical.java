@@ -37,35 +37,42 @@ class Solution
 		
 		dp=new int[X.length()+1][Y.length()+1];
 		
+		int[] cur=new int[m+1];
+		int[] next=new int[m+1];
+		
 		for(int i=n;i>=0;i--){
 		    for(int j=m;j>=0;j--){
 		        
 		    if(i>=X.length()||j>=Y.length()){
 	        if(i<X.length()){
 	            
-	            dp[i][j]= costX*(X.length()-i);
+	            cur[j]= costX*(X.length()-i);
 	            
 	        }else if(j<Y.length()){
-	            dp[i][j]= costY*(Y.length()-j); 
+	            cur[j]= costY*(Y.length()-j); 
 	            
 	        }else{
-	            dp[i][j]= 0;
+	           cur[j]= 0;
 	        }
 	        continue;
 	    }
 		        
 		        
 		   if(X.charAt(i)==Y.charAt(j)){
-	        dp[i][j]= dp[i+1][j+1];
+	        cur[j]= next[j+1];
 	    }else{
-	        dp[i][j]= Math.min(dp[i][j+1]+costY,dp[i+1][j]+costX);
+	        cur[j]= Math.min(cur[j+1]+costY,next[j]+costX);
 	    }
 		        
 		        
 		    }
+		    next=cur;
+		    
+		    if(i!=0)
+		    cur=new int[m+1];
 		}
 		
-		return dp[0][0];
+		return cur[0];
 		
 		
 // 		return solve(X,Y,0,0,costX,costY);
