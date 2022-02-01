@@ -24,30 +24,48 @@ class GFG
 //User function Template for Java
 
 class Solution{
-    Integer[][] dp;
+    int[][] dp;
     int findMinInsertions(String s){
         // code here
         int n=s.length();
-        dp=new Integer[n][n];
+        dp=new int[n][n];
         
-        return solve(s,0,n-1);
+        for(int i=n-1;i>=0;i--){
+            for(int j=0;j<n;j++){
+                 if(i>=j){
+                dp[i][j]= 0;
+                continue;
+                }
+                
+                if(s.charAt(i)==s.charAt(j)){
+             dp[i][j]= dp[i+1][j-1];
+        }else{
+             dp[i][j]= Math.min(dp[i+1][j],dp[i][j-1])+1;
+        }
+                
+            }
+        }
+        
+        
+        return dp[0][n-1];
+        // return solve(s,0,n-1);
     }
     
-    public int solve(String s,int i,int j){
+    // public int solve(String s,int i,int j){
         
        
         
-        if(i>=j){
-            return 0;
-        }
+    //     if(i>=j){
+    //         return 0;
+    //     }
         
-        if(dp[i][j]!=null)return dp[i][j];
+    //     if(dp[i][j]!=null)return dp[i][j];
         
-        if(s.charAt(i)==s.charAt(j)){
-            return dp[i][j]= solve(s,i+1,j-1);
-        }else{
-            return dp[i][j]= Math.min(solve(s,i+1,j),solve(s,i,j-1))+1;
-        }
+        // if(s.charAt(i)==s.charAt(j)){
+        //     return dp[i][j]= solve(s,i+1,j-1);
+        // }else{
+        //     return dp[i][j]= Math.min(solve(s,i+1,j),solve(s,i,j-1))+1;
+        // }
         
-    }
+    // }
 }
