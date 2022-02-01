@@ -30,24 +30,30 @@ class Solution{
         int n=s.length();
         dp=new int[n][n];
         
+        int[] cur=new int[n];
+        int[] next=new int[n];
+        
         for(int i=n-1;i>=0;i--){
             for(int j=0;j<n;j++){
                  if(i>=j){
-                dp[i][j]= 0;
+                cur[j]= 0;
                 continue;
                 }
                 
                 if(s.charAt(i)==s.charAt(j)){
-             dp[i][j]= dp[i+1][j-1];
+             cur[j]=next[j-1];
         }else{
-             dp[i][j]= Math.min(dp[i+1][j],dp[i][j-1])+1;
+             cur[j]= Math.min(next[j],cur[j-1])+1;
         }
                 
             }
+            next=cur;
+            if(i!=0)
+            cur=new int[n];
         }
         
         
-        return dp[0][n-1];
+        return cur[n-1];
         // return solve(s,0,n-1);
     }
     
