@@ -28,7 +28,7 @@ class Solution{
     int findMinInsertions(String s){
         // code here
         int n=s.length();
-        dp=new int[n][n];
+        // dp=new int[n][n];
         
         int[] cur=new int[n];
         int[] next=new int[n];
