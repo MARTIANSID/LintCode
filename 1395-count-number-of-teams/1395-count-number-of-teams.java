@@ -1,61 +1,47 @@
 class Solution {
-    Integer[][] dp1;
-    
-    Integer[][] dp2;
-    
-    public int numTeams(int[] rating) {
+    public int numTeams(int[] arr) {
+        int n=arr.length;
         
-        int ans=0;
         
-        int n=rating.length;
+        int[] dpInc=new int[n];
         
-        dp1=new Integer[n+1][4];
-        dp2=new Integer[n+1][4];
+        int[] dpDec=new int[n];
+               
+         int ans=0;
+        
 
-        
-        for(int i=0;i<rating.length;i++){
-            ans+=solve(i,1,rating);
+        for(int i=n-1;i>=0;i--){
+            for(int j=i+1;j<n;j++){
+                if(arr[i]<arr[j]){
+                    ans+=dpInc[j];
+                     dpInc[i]++;
+                }
+                   
+            }
+            
+            
         }
         
-        for(int i=0;i<rating.length;i++){
-            ans+=solveD(i,1,rating);
+        
+        
+        for(int i=n-1;i>=0;i--){
+            for(int j=i+1;j<n;j++){
+              if(arr[i]>arr[j]){
+                  ans+=dpDec[j];
+                    dpDec[i]++;
+              }
+                        
+                
+                
+            }
+            
+
         }
+        
+
         
         return ans;
         
-    }
-    
-    public int solve(int index,int c,int[] arr){
-        
-        int count=0;
-        
-        if(c==3)return 1;
-        
-        if(dp1[index][c]!=null)return dp1[index][c];
-        
-        for(int i=index+1;i<arr.length;i++){
-            if(arr[i]>arr[index]){
-                count+=solve(i,c+1,arr);
-            }
-        }
-        return dp1[index][c]= count;
-        
-    }
-    
-     public int solveD(int index,int c,int[] arr){
-        
-        int count=0;
-        
-        if(c==3)return 1;
-         
-          if(dp2[index][c]!=null)return dp2[index][c];
-        
-        for(int i=index+1;i<arr.length;i++){
-            if(arr[i]<arr[index]){
-                count+=solveD(i,c+1,arr);
-            }
-        }
-        return dp2[index][c]= count;
         
     }
 }
