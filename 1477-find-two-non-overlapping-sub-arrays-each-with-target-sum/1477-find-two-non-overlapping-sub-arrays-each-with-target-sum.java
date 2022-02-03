@@ -15,28 +15,42 @@ class Solution {
         
         HashMap<Integer,Integer> map=new HashMap<>();
         
-        PriorityQueue<pair> pq=new PriorityQueue<>((a,b)->{
-            return a.end-b.end;
-        });
+        // PriorityQueue<pair> pq=new PriorityQueue<>((a,b)->{
+        //     return a.end-b.end;
+        // });
         
         int min=(int)1e9,sum=0,ans=(int)1e9;
         
         map.put(0,-1);
         
+        int[] left=new int[n];
+        
+        Arrays.fill(left,(int)1e9);
+        
         for(int i=0;i<n;i++){
             sum+=arr[i];
             
+            boolean flag=false;
+            
             if(map.containsKey(sum-target)){
-                int start=map.get(sum-target)+1;
-                while(pq.size()>0&&pq.peek().end<start){
-                    min=Math.min(min,pq.poll().val);
+              int s=map.get(sum-target);
+                if(s==-1){
+                    left[i]=i-s;
+                    map.put(sum,i);
+                    continue;
                 }
                 
-                if(min!=(int)1e9){
-                    ans=Math.min(ans,min+i-(start-1));
+                int val=left[s];
+                
+                if(val!=(int)1e9){
+                    ans=Math.min(ans,val+i-s);
                 }
                 
-                pq.add(new pair(i,i-(start-1)));
+                left[i]=Math.min(left[i-1],i-s);    
+                flag=true;
+            }
+            if(!flag&&i>0){
+                left[i]=left[i-1];
             }
             
             map.put(sum,i);
