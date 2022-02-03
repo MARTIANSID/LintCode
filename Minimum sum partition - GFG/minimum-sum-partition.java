@@ -26,7 +26,7 @@ class GfG
 
 class Solution
 {
-         static boolean[][] dp;
+        //  static boolean[][] dp;
 	public int minDifference(int arr[], int n) 
 	{ int sum=0;
         for(int ele:arr)sum+=ele;
@@ -35,37 +35,45 @@ class Solution
         int target=sum;
         
 
-        dp=new boolean[n+1][target+1];
+        // dp=new boolean[n+1][target+1];
+        
+        boolean[] curr=new boolean[target+1];
+        
+        boolean[] next=new boolean[target+1];
         
         
         
         for(int i=n;i>=0;i--){
             for(int j=0;j<=target;j++){
                  if(i>=n&&j==0){
-                       dp[i][j]= true;
+                       curr[j]= true;
                      	continue;
                  }
                  if(i>=n){
-                     dp[i][j]= false;
+                      curr[j]= false;
                      continue;
                  }
            boolean take=false;
         
         if(j>=arr[i])
-         take=dp[i+1][j-arr[i]];
+         take=next[j-arr[i]];
         
-        boolean leave=dp[i+1][j];
+        boolean leave=next[j];
         
-        	dp[i][j] =leave||take;
+        	curr[j] =leave||take;
         
                 
             }
+            next=curr;
+            
+            if(i!=0)
+            curr=new boolean[target+1];
         }
         
         int min=(int)1e9;
         
         for(int i=0;i<=target;i++){
-            if(dp[0][i]==true){
+            if(curr[i]==true){
                 min=Math.min(min,Math.abs((sum-i)-i));
             }
         }
