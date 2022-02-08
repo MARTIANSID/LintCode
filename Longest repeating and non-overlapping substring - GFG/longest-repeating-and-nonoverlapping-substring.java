@@ -46,8 +46,13 @@ class Solution {
                     continue;
                 }
                 
+                if(i>j){
+                    continue;
+                }
+                
                 if(s.charAt(i)==s.charAt(j)){
-                    dp[i][j]=dp[i+1][j+1]+1;
+                int val = j>(i+dp[i+1][j+1])?dp[i+1][j+1]:((dp[i+1][j+1]+1)-j); 
+                    dp[i][j]=val+1;
                     if(dp[i][j]>=max){
                         row=i;
                         col=j;
@@ -67,21 +72,10 @@ class Solution {
       
       if(row==-1||col==-1)return "-1";
       
-      
-      while(row<n&&col<n){
-          if(s.charAt(row)==s.charAt(col)){
-              ans+=s.charAt(row);
-              row++;
-              col++;
-          }else{
-              break;
-          }
-      }  
+    
+     
         
-        
-      
-        
-        return ans;
+        return s.substring(row,row+dp[row][col]);
         
     }
 };
