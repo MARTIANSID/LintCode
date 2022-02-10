@@ -6,17 +6,25 @@ class Solution {
         
         if(n==2)return Math.max(nums[0],nums[1]);
         
-        int[] dp=new int[n];
         
         
         
-        dp[n-1]=nums[n-1];
-        dp[n-2]=Math.max(nums[n-2],nums[n-1]);
+        
+        int include=nums[n-1];
+        int dontInclude=Math.max(nums[n-2],nums[n-1]);
         
         for(int i=n-3;i>=0;i--){
-            dp[i]=Math.max(dp[i+2]+nums[i],dp[i+1]);
+            int x=Math.max(include+nums[i],dontInclude);
+            include=dontInclude;
+            dontInclude=x;
         }
         
-        return dp[0];
+        return dontInclude;
     }
+    
+//     public int solve(int index,int [] nums){
+        
+//         solve(index+1,nums);
+//         solve(index+2,nums);
+//     }
 }
