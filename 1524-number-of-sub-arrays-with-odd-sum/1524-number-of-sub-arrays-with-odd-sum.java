@@ -11,13 +11,14 @@ class Solution {
         
         prefix[0]=(long)1;
         
-        long  sum=0,count=0;
+        int sum=0;
+        long count=0;
         for(int i=0;i<n;i++){
             sum+=arr[i];
-            long rem=(sum-1)%2;
+            int rem=(sum-1)%2;
             
-        count=(count+prefix[(int)rem])%mod;
-            prefix[(int)(sum%2)]++;
+        count=(count+prefix[rem])%mod;
+            prefix[(sum%2)]++;
         }
         
         return (int)(count%mod);
