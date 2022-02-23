@@ -5,17 +5,19 @@ class Solution {
         
         //find subarrays giving remainder as 1
         
-        HashMap<Long,Long> map=new HashMap<>();
-        map.put((long)0,(long)1);
+        // HashMap<Long,Long> map=new HashMap<>();
+        long[] prefix=new long[2];
+        
+        
+        prefix[0]=(long)1;
         
         long  sum=0,count=0;
         for(int i=0;i<n;i++){
             sum+=arr[i];
             long rem=(sum-1)%2;
-            if(map.containsKey(rem)){
-                count=(count+map.get(rem))%mod;
-            }
-            map.put(sum%2,map.getOrDefault(sum%2,(long)0)+1);
+            
+        count=(count+prefix[(int)rem])%mod;
+            prefix[(int)(sum%2)]++;
         }
         
         return (int)(count%mod);
