@@ -31,18 +31,27 @@ class Solution {
         
         while(que.size()!=0){
             int size=que.size();
+            int index=0;
+            LinkedList<Node> st=new LinkedList<>();
             while(size-->0){
                 Node node=que.removeFirst();
                 if(node.left!=null){
+                    
                     que.add(node.left);
+                    st.add(node.left);
                 }
                 if(node.right!=null){
+                   
                     que.add(node.right);
-                }   
+                    st.add(node.right);
+                }  
+                
+                while(st.size()>=2){
+                 st.removeFirst().next=st.peek();
+                }
+
             }
-            for(int i=0;i<que.size()-1;i++){
-                que.get(i).next=que.get(i+1);
-            }
+            
         }
         return root;
     }
