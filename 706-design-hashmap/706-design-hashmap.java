@@ -11,7 +11,7 @@ class MyHashMap {
     }
 
     LinkedList<Node>[] buckets;
-    int size = 700;
+    int size = 900;
 
     public MyHashMap() {
         this.buckets = new LinkedList[size];
