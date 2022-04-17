@@ -15,20 +15,20 @@
  */
 class Solution {
     TreeNode dummy=new TreeNode(-1);
-    TreeNode r=dummy;
+    TreeNode prev=dummy;
     public TreeNode increasingBST(TreeNode root) {
         inorder(root);
         
-        return r.right;
+        return dummy.right;
     }
     public void inorder(TreeNode root){
         
         if(root == null)return;
         
         inorder(root.left);
-        dummy.right=new TreeNode(root.val);
-        dummy=dummy.right;
-        
+        prev.right=root;
+        root.left=null;
+        prev=root;
         inorder(root.right);
     }
 }
