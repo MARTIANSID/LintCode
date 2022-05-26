@@ -15,7 +15,7 @@ class Solution {
 
         public void insert(int num) {
             TrieNode node = root;
-            for (int i = 16; i >= 0; i--) {
+            for (int i = 15; i >= 0; i--) {
                 int x = 1 << i;
                 int bit = (num & x) == 0 ? 0 : 1;
                 if (node.children[bit] == null) {
@@ -66,7 +66,7 @@ class Solution {
         int ans = 0;
         for (int ele : nums) {
             TrieNode node = t.root;
-            ans+= t.dfs(ele,16, node);
+            ans+= t.dfs(ele,15, node);
             
         }
 
