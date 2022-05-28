@@ -14,7 +14,7 @@ class Solution {
             int mid=si+(ei-si)/2;
             
             long count=(mid/a)+(mid/b)+(mid/c)-(mid/ab)-(mid/ac)-(mid/bc)+(mid/abc);
-            System.out.println(mid);
+          
             
             if(count>=n){
                 ei=mid-1;
