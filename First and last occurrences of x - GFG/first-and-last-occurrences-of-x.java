@@ -19,20 +19,52 @@ class GFG
         
         long startingIndex=-1,endingIndex=-1;
         
-        for(int i=0;i<n;i++){
-            if(arr[i] == x){
-                if(startingIndex==-1)
-                startingIndex=i;
-                endingIndex=i;
-            }
-        }
+      int s=  findFirstIndex(arr,x);
         
-        ArrayList<Long> ans=new ArrayList<>();
-        ans.add(startingIndex);
-        ans.add(endingIndex);
+       int e= findLastIndex(arr,x);
+       
+       ArrayList<Long> ans=new ArrayList<>();
+       ans.add((long)s);
+       ans.add((long)e);
        return ans;
         
     }
+    
+    public int findFirstIndex(long[] arr,int x){
+        int si=0,ei=arr.length-1;
+        
+        while(si<=ei){
+            int mid=(si+ei)/2;
+            if(arr[mid]>x){
+                ei=mid-1;
+            }else if(arr[mid]<x){
+                si=mid+1;
+            }else{
+                if(mid-1>=0 && arr[mid-1]==x)ei=mid-1;
+                else return mid;
+            }
+        }
+        return -1;
+    }
+    
+    public int findLastIndex(long[] arr,int x){
+        int si=0,ei=arr.length-1;
+        
+        while(si<=ei){
+            int mid=(si+ei)/2;
+            if(arr[mid]>x){
+                ei=mid-1;
+            }else if(arr[mid]<x){
+                si=mid+1;
+            }else{
+                if(mid+1<arr.length && arr[mid+1]==x)si=mid+1;
+                else return mid;
+            }
+        }
+        return -1;
+    }
+    
+    
 }
 
 
