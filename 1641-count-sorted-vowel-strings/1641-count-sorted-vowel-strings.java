@@ -1,4 +1,14 @@
 class Solution {
+    
+    
+    /*
+    logic - for n = 1 ans is a e i o u
+     in the next round u can come bheind any string
+     o can come behind all strings except except string ending at u
+     i can come bheind all strings except string ending at o and u
+     and so on the logic
+     
+    */
 
     public int countVowelStrings(int n) {
         int[] dp = new int[n];
