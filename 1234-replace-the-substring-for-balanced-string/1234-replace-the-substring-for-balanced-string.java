@@ -1,4 +1,10 @@
 class Solution {
+    
+    /*
+        sliding window
+        idea->in our window we want to keep the substring such that the remaining string becomes valid
+    
+    */
 
     public int balancedString(String s) {
         int n = s.length();
