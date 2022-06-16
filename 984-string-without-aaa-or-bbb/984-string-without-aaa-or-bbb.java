@@ -1,5 +1,8 @@
 class Solution {
-
+    /*
+     eg a->6    aabaabaa
+        b->2
+    */
     public String strWithout3a3b(int a, int b) {
         boolean flag = a > b ? false : true;
         StringBuilder sb = new StringBuilder();
