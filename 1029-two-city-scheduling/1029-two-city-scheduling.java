@@ -3,7 +3,7 @@ class Solution {
     /*
     Greedy Logic - > we want to send a person either to city A or  city B question is how do we decide this
 
-     if we find out the diff btw costA-costB for each person if the cost high then it means it favours b else if the cost is less it mean it favours b 
+     if we find out the diff btw costA-costB for each person if the cost high then it means it favours b else if the cost is less it mean it favours a
     
     so sort the array on basis of difference and use two  pointer set one pointer to start and one to end,
     element at one pointer will favour a and other to b
