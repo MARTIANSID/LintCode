@@ -33,7 +33,7 @@ class Solution {
                 }
                 node = node.children[ch - 'a'];
             }
-            return node.isEnd;
+            return true;
         }
       
     }
@@ -49,10 +49,10 @@ class Solution {
         );
         int ans = 0;
         for (String w : words) {
+            w=new String(new StringBuilder(w).reverse());
+            
             if (!t.contains(w)) {
-                for (int i = 0; i < w.length(); i++) {
-                    t.insert(w.substring(i, w.length()));
-                }
+                 t.insert(w);
                  ans += (w.length() + 1);
             } 
         }
