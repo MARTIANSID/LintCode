@@ -27,12 +27,13 @@ class Solution {
             if(tx==0 || ty==0)return false;
             
             if(tx>ty){
-                if(tx==sx)return false;
+             
                 int ele=tx%ty;
                 if(ele<sx){
                     int e=sx%ty;
                     if(e==ele){
                         tx=sx;
+                         if(ty!=sy)return false;
                     }else{
                         return false;
                     }
@@ -40,12 +41,12 @@ class Solution {
                     tx=ele;
                 }
             }else{
-                if(ty==sy)return false;
                 int ele=ty%tx;
                 if(ele<sy){
                     int e=sy%tx;
                     if(e==ele){
                         ty=sy;
+                        if(tx!=sx)return false;
                     }else{
                         return false;
                     }
