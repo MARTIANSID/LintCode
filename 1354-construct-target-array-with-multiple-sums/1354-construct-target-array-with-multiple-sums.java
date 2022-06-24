@@ -24,7 +24,10 @@ class Solution {
             sum=remainingSum;
             if(remainingSum>=maxEle)return false;
             long mod=maxEle%remainingSum;
-            if(mod==0)mod+=(remainingSum);
+            if(mod==0){
+                if(remainingSum!=1)return false;
+                mod+=(1);
+            }
             sum+=mod;
             if(mod!=1)pq.add((int)mod);
         }
