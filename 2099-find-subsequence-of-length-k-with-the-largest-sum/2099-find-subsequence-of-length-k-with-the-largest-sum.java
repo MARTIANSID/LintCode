@@ -10,15 +10,14 @@ class Solution {
             sum+=nums[i];
              pq.add(i);
             if(i>=k){
-             sum-=pq.poll();
+             nums[pq.poll()]=-(int)1e6;
             }
         }
-        List<Integer> indices=new ArrayList<>();
-        while(pq.size()>0)indices.add(pq.poll());
-        Collections.sort(indices);
         int[] ans=new int[k];
-        for(int i=0;i<k;i++){
-            ans[i]=nums[indices.get(i)];
+        int index=0;
+        for(int i=0;i<n;i++){
+            if(nums[i]!=-(int)1e6)
+            ans[index++]=nums[i];
         }
         return ans;
         
