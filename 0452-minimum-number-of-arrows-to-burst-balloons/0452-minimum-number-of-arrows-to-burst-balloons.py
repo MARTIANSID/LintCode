@@ -1,8 +1,8 @@
 class Solution(object):
     def findMinArrowShots(self, points):
       points.sort(key=lambda x:x[1])
-      prev=float('-inf')
-      arrows=0
+      prev=points[0][1]
+      arrows=1
       for p in points:
         start=p[0]
         end=p[1]
