@@ -13,7 +13,9 @@ class Solution {
         }
         long partitionSumLessThanK = (solve(nums, 0, 0, k, total)) % mod;
         
-        
+        /*
+        when subtracting add mod  (imp)
+        */
 
         return (int) ((pow((long)2, (long)n) - partitionSumLessThanK - 2+mod) % mod);
     }
