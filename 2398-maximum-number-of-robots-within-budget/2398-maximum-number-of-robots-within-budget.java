@@ -15,10 +15,15 @@ class Solution {
       deq.add(ei++);
       int max = chargeTimes[deq.peekFirst()];
       long cost = max + (ei - si) * sum;
-      if (cost > budget) {
+      while (cost > budget && si<ei) {
         sum -= runningCosts[si];
         if (si == deq.peekFirst())
           deq.removeFirst();
+        if(deq.size()>0){
+            cost=chargeTimes[deq.peekFirst()]+(ei-si)*sum;
+        }else{
+            cost=0;
+        }
         si++;
       }
       ans = Math.max(ans, ei - si);
