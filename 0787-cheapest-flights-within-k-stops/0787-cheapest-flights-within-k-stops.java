@@ -23,7 +23,7 @@ class Solution {
         graph.get(u).add(new pair(v,f[2],0));
       }
       
-      boolean[][] visited=new boolean[n][2*n+1];
+      boolean[][] visited=new boolean[n][n+3];
      
       PriorityQueue<pair> que=new PriorityQueue<>((a,b)->{
         return a.cost-b.cost;
