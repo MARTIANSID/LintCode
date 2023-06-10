@@ -41,7 +41,7 @@ class Solution {
         
         long leftSum=((leftSize*(2*start+(leftSize-1)))/2)+extraOnes;
         
-        System.out.println(leftSum);
+        // System.out.println(leftSum);
       
         long rightSize=n-index-1;
          start=val-1-rightSize+1;
