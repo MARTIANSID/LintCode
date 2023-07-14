@@ -30,7 +30,7 @@ public int maximumJumps(int[] nums, int target) {
         
         for(int i=idx+1;i<n;i++){
             if(Math.abs(nums[i]-nums[idx])<=target){
-                result=Math.max(result,solve(i,nums,target)+1);
+                result=Math.max(result,1+solve(i,nums,target));
             }
         }
         
