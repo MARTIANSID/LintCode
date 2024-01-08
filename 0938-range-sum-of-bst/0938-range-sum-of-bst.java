@@ -20,8 +20,10 @@ class Solution {
         
         int sum=0;
         
+        if(root.val>=low)
         sum+=rangeSumBST(root.left,low,high);
-        sum+=rangeSumBST(root.right,low,high);
+        if(root.val<=high)
+        sum+=rangeSumBST(root.right,low,high); 
         
         return sum + (root.val<= high && root.val>=low ? root.val : 0);
     }
