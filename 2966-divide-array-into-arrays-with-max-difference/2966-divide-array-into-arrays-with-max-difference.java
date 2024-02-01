@@ -1,24 +1,27 @@
 class Solution {
     public int[][] divideArray(int[] nums, int k) {
-        
         int n=nums.length;
         Arrays.sort(nums);
         
+        int firstIndex = 0,currLength=0,index=0;
+        
         int[][] ans=new int[n/3][3];
         
-        int start=0,end=2,index=0;
+        if(n%3!=0) return new int[][]{};
+
         
-        while(end<n){
-            if(nums[end]-nums[start]<=k){
-                ans[index++]=Arrays.copyOfRange(nums, start, end+1);
-            
+        for(int i=0;i<n;i++){
+            if(nums[i]-nums[firstIndex]<=k){
+                currLength++;
             }else{
-                return new int[][]{};
+                if(currLength < 3)return new int[][]{};
+                }
+            if(currLength == 3){
+                ans[index++]=Arrays.copyOfRange(nums,firstIndex,i+1);
+                currLength=0;
+                firstIndex=i+1;
             }
-            start=end+1;
-            end+=3;
         }
-        
-         return ans;
+        return ans;
     }
 }
