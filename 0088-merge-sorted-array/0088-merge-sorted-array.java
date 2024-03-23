@@ -7,8 +7,6 @@ class Solution {
         
         while(i >= 0 && j >= 0){
             
-    
-            
             if(nums1[i] >= nums2[j]){
                 nums1[len] = nums1[i];
                 i--;
