@@ -6,20 +6,20 @@ class Solution:
         
         for ele in students:
             if ele == 1:
-                countOfOnes+=1
+                countOfOnes+=1 
             else:
                 countOfZeros+=1
         
-        for ele in sandwiches:
+        for ele in sandwiches:          
             if ele == 1:
                 if countOfOnes > 0:
                     countOfOnes-=1
                 else:
-                    break
+                    return countOfZeros
             else:
                 if countOfZeros > 0:
                     countOfZeros-=1
                 else:
-                    break
-        return countOfOnes+countOfZeros
+                    return countOfOnes
+        return 0
         
