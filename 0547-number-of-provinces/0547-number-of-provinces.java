@@ -1,46 +1,53 @@
 class Solution {
-    public int findCircleNum(int[][] isConnected) {
-        int n= isConnected.length;
-        int[] parent=new int[n+1];
-        int[] size=new int[n+1];
-            
-            for(int i=1;i<=n;i++){
-                    parent[i]=i;
-                    size[i]=1;
-            }
-            int count=0;
-            
-         for(int i=0;i<isConnected.length;i++){
-                  
-                for(int j=0;j<isConnected[0].length;j++){
-                        if(i!=j){
-                               if(isConnected[i][j]==1){
-                                    int p1=   findParent(i+1,parent);
-                                    int p2=   findParent(j+1,parent);
-                                       
-                                       if(p1!=p2){
-                                               count++;
-                                              parent[p1]=p2;
-                                              
-                                       }
-                                     
-                               }
-                        }
-                }
-         }
-            return n-count;
-    }
-        
-        public int findParent(int u,int[] parent){
-                if(parent[u]==u){
-                        return u;
-                }
-                
-             int p=  findParent(parent[u],parent);
-                
-                parent[u]=p;
-                return p;
+
+    public int findParent(int u, int[] parent) {
+        if (u == parent[u]) {
+            return u;
         }
-        
-        
+
+        int p = findParent(parent[u], parent);
+
+        return p;
+    }
+
+    public int findCircleNum(int[][] isConnected) {
+        int n = isConnected.length;
+
+        int[] parent = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            parent[i] = i; // initial state
+        }
+
+        int currentNode = 0;
+
+        for (int[] edges : isConnected) {
+            //[1,1,0]
+
+            for (int node = 0; node < edges.length; node++) {
+                if (node == currentNode) continue;
+
+                int connection = edges[node];
+
+                if (connection == 1) {
+                    // node, currentNode has edge
+                    int p1 = findParent(node, parent);
+                    int p2 = findParent(currentNode, parent);
+
+                    if (p1 != p2) {
+                        parent[p1] = parent[p2]; //adding both node and currentNode in the same set
+                    }
+                }
+            }
+            currentNode++;
+        }
+
+        HashSet<Integer> set = new HashSet<>();
+
+        for (int i = 0; i < n; i++) {
+            int p = findParent(i,parent);
+            set.add(p);
+        }
+        return set.size();
+    }
 }
