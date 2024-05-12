@@ -6,6 +6,7 @@ class Solution {
         }
 
         int p = findParent(parent[u], parent);
+        parent[u] = p;
 
         return p;
     }
