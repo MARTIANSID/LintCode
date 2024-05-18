@@ -1,52 +1,64 @@
-import java.util.ArrayList;
-import java.util.*;
 class Solution {
-  class pair{
-    int vrtx;
-    int cost;
-    int stops;
-    pair(int vrtx,int cost,int stops){
-      this.vrtx=vrtx;
-      this.cost=cost;
-      this.stops=stops;
-    }
-  }
-  public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
-    List<List<pair>> graph=new ArrayList<>();
-    for(int i=0;i<n;i++){
-      graph.add(new ArrayList<>());
-    }
 
-    for(int i=0;i<n;i++)graph.add(new ArrayList<>());
-      for(int[] f:flights){
-        int u=f[0],v=f[1];
-        graph.get(u).add(new pair(v,f[2],0));
-      }
-      
-      boolean[][] visited=new boolean[n][n+3];
-     
-      PriorityQueue<pair> que=new PriorityQueue<>((a,b)->{
-        return a.cost-b.cost;
-      });
-      que.add(new pair(src,0,0));
+    class Edge {
+        int node;
+        int weight;
+        int stops;
 
-      while(que.size()!=0){
-        int size=que.size();
-        while(size-->0){
-          pair p=que.poll();
-          int vrtx=p.vrtx;
-          int cost=p.cost;
-          if(visited[vrtx][p.stops])continue;
-          if(p.stops-1>k)continue;
-          if(vrtx == dst){ 
-              return cost;
-          }
-          visited[vrtx][p.stops]=true;
-          for(pair child:graph.get(vrtx)){
-              que.add(new pair(child.vrtx,child.cost+cost,p.stops+1));
-          }
+        Edge(int node, int weight, int stops) {
+            this.weight = weight;
+            this.node = node;
+            this.stops = stops;
         }
-      }
-      return -1;
-  }
+    }
+
+    public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
+        List<List<Edge>> graph = new ArrayList<>();
+
+        boolean[][] visited = new boolean[n][100];
+
+        for (int i = 0; i < n; i++) {
+            graph.add(new ArrayList<>());
+        }
+
+        for (int[] t : flights) {
+            int u = t[0], v = t[1], w = t[2];
+            graph.get(u).add(new Edge(v, w, 0));
+        }
+
+        PriorityQueue<Edge> pq = new PriorityQueue<>(
+            (a, b) -> {
+                return a.weight - b.weight;
+            }
+        ); // min heap
+
+        pq.add(new Edge(src, 0, 1));
+
+        while (pq.size() > 0) {
+            int size = pq.size();
+
+            while (size-- > 0) {
+                Edge e = pq.poll();
+                int node = e.node, weight = e.weight, stops = e.stops;
+                
+                if(visited[node][stops]) continue;
+
+                if (stops - 2 > k) continue;
+
+                if (node == dst) {
+                    return weight;
+                }
+
+                visited[node][stops] = true;
+
+                for (Edge child : graph.get(node)) {
+                    
+                    if(!visited[child.node][child.stops+1])
+                    pq.add(new Edge(child.node, child.weight + weight, stops + 1));
+                }
+            }
+        }
+
+        return -1;
+    }
 }
