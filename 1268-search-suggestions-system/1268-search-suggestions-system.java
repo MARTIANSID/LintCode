@@ -78,11 +78,11 @@ class Solution {
         for(String word: products){
             t.insert(word);
         }
-        String prefix = "";
+        StringBuilder prefix = new StringBuilder();
         for(int i = 0; i < searchWord.length(); i++){
-            prefix += searchWord.charAt(i);
-            
-            ans.add(t.checkPrefix(prefix));
+            prefix.append(searchWord.charAt(i));
+        
+            ans.add(t.checkPrefix(prefix.toString()));
             
         }
         return ans;
