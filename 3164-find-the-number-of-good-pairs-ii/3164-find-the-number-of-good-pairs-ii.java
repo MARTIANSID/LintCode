@@ -7,16 +7,13 @@ class Solution {
         
         
         for(int ele: nums1) {
-            HashSet<Integer> set = new HashSet<>();
             for(int i = 1; i<=Math.sqrt(ele); i++){
                 if(ele%i == 0){
-                    if(!set.contains(i))
                     map.put(i,map.getOrDefault(i,0)+1);
                     
-                    if(ele/i != i && !set.contains(ele/i))
+                    if(ele/i != i)
                     map.put(ele/i,map.getOrDefault(ele/i,0)+1);
-                    set.add(i);
-                    set.add(ele/i);
+                   
                 }
             }
         }
