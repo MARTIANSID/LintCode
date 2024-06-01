@@ -6,6 +6,22 @@ class Solution {
     
     int[] exp = new int[30];
     
+    public int pow(int exp){
+        int res = 1;
+        int base = 2;
+        
+        while(exp > 0) {
+            if(exp % 2 == 0) {
+                exp /= 2;
+                base *= base;
+            } else {
+                exp--;
+                res *= base;
+            }
+        }
+        return res;
+    }
+    
     public int waysToReachStair(int k) {
         
         dp = new HashMap<>();
@@ -19,7 +35,7 @@ class Solution {
         
         
         for(int i = 0; i < 30; i++) {
-            exp[i] = (1<<i);
+            exp[i] = pow(i);
         }
         
         return dfs(1,0,k,1);
@@ -43,8 +59,6 @@ class Solution {
             return dp.get(currStair)[jump][prevState];
             
         }
-        
-
         
         if(currStair >= 1 && prevState == 1) {
             count += dfs(0,jump,k,currStair-1);
