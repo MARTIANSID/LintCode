@@ -1,5 +1,7 @@
 class Solution {
 
+    
+    // optimized the combinatrics formula
 
     public long sumDigitDifferences(int[] nums) {
         HashMap<Integer, Integer>[] digitDiff = new HashMap[10];
