@@ -11,7 +11,7 @@ class Solution {
         if(k == 0) {
             MAX = 3;
         } else {
-            MAX = (int)Math.log(1e9) + 20;
+            MAX = (int)Math.log(1e9) + 20; // here 20 compensates for y roughly
         }
         
         return dfs(1,0,k,1);
