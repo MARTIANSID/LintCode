@@ -4,6 +4,8 @@ class Solution {
     
     int MAX;
     
+    int[] exp = new int[30];
+    
     public int waysToReachStair(int k) {
         
         dp = new HashMap<>();
@@ -12,6 +14,12 @@ class Solution {
             MAX = 3;
         } else {
             MAX = (int)Math.log(1e9) + 20; // here 20 compensates for y roughly
+        }
+        
+        
+        
+        for(int i = 0; i < 30; i++) {
+            exp[i] = (1<<i);
         }
         
         return dfs(1,0,k,1);
@@ -40,7 +48,7 @@ class Solution {
             count += dfs(0,jump,k,currStair-1);
         }
         
-        count += dfs(1,jump+1,k,currStair + (int)Math.pow(2,jump));
+        count += dfs(1,jump+1,k,currStair + exp[jump]);
         
         
         if(!dp.containsKey(currStair)){
