@@ -27,6 +27,8 @@ class Solution {
     
     public int dfs(int prevState, int jump, int k, int currStair) {
         
+        if (currStair > k + 1) return 0;
+        
         int count = 0;
         
         if(currStair == k) {
