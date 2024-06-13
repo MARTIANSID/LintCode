@@ -1,10 +1,15 @@
 class Solution {
     public int countArrangement(int n) {
+        
+        
+        int mask = 0;
     
-        return dfs(n, new boolean[n+1], 1);
+        return dfs(n, mask, 1);
     }
     
-    public int dfs(int n, boolean[] visited, int index) {
+    public int dfs(int n, int mask, int index) {
+        
+        
         
         if(index == n + 1) {
             return 1;
@@ -14,11 +19,13 @@ class Solution {
         int count = 0;
         
         for(int i = 1; i <= n; i++){
-            if(!visited[i]) {
+            int x = (1<<i);
+            
+            int bit = (mask&x);
+                        
+            if(bit == 0) {
                 if(i % index == 0 || index % i == 0) {
-                    visited[i] = true;
-                    count += dfs(n,visited,index+1);
-                    visited[i] = false;
+                    count += dfs(n,(mask|x),index+1);
                 }
             }
         }
