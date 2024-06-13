@@ -1,10 +1,10 @@
 class Solution {
+    Integer[][] dp;
     public int countArrangement(int n) {
         
-        
-        int mask = 0;
+        dp = new Integer[n+1][(1<<(n+1))];
     
-        return dfs(n, mask, 1);
+        return dfs(n, 0, 1);
     }
     
     public int dfs(int n, int mask, int index) {
@@ -15,6 +15,9 @@ class Solution {
             return 1;
         }
         
+        if(dp[index][mask] != null) {
+            return dp[index][mask];
+        }
         
         int count = 0;
         
@@ -29,9 +32,18 @@ class Solution {
                 }
             }
         }
-        return count;
+        return dp[index][mask] = count;
     }
 }
+// [1,2,3,4,5, 6000]÷
+
+
+
+
+
+
+// dp[index][mask]
+
 
 
     
