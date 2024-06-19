@@ -33,3 +33,11 @@ class Solution {
             
     }
 }
+
+/*
+why prev is not part of the dp?
+
+because when we arrive at the same state then the total sum of removed pairse will be same and the no of pairs removed will also be the same for each state and hence the sum of each pair = total sum / no of pairs will also be same as result
+
+
+*/
