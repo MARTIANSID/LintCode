@@ -1,10 +1,10 @@
 class Solution {
-    int noOfComponents = 0;
+    int cnt = 0;
 
     public int maxKDivisibleComponents(int n, int[][] edges, int[] values, int k) {
         List<List<Integer>> graph = new ArrayList<>();
-
-        for (int i = 0; i < n; i++) {
+        
+        for(int i = 0; i <n; i++){
             graph.add(new ArrayList<>());
         }
 
@@ -15,29 +15,25 @@ class Solution {
             graph.get(v).add(u);
         }
 
-        long sum = dfs(graph, n - 1, values, -1, k);
+        dfs(graph, n - 1, -1, k, values);
 
-        if (sum % k == 0) {
-            noOfComponents++;
-        }
-
-        return noOfComponents;
+        return cnt;
     }
 
-    public long dfs(List<List<Integer>> graph, int src, int[] values, int par, int k) {
-        long sum = 0;
-
+    public int dfs(List<List<Integer>> graph, int src, int par, int k, int[] values) {
+        int sum = 0;
         for (int child : graph.get(src)) {
             if (child != par) {
-                long sumOfChildValues = dfs(graph, child, values, src, k);
-
-                if (sumOfChildValues % k == 0) {
-                    noOfComponents += 1;
-                } else {
-                    sum += sumOfChildValues;
-                }
+                sum += dfs(graph, child, src, k, values);
             }
         }
-        return sum + values[src];
+        sum += (values[src]);
+        
+        sum = sum % k;
+        
+        if (sum % k == 0) {
+            cnt++;
+        }
+            return sum;
     }
 }
